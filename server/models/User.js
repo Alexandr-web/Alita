@@ -8,9 +8,9 @@ const User = sequelize.define("user", {
     unique: true,
   },
   id: {
-    primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: true,
+    primaryKey: true,
   },
 }, { tableName: "user", });
 

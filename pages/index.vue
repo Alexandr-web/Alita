@@ -1,5 +1,10 @@
 <template>
-  <h1>Hello, world!</h1>
+  <div class="page">
+    <div class="container">
+      <div class="page__inner pt-90">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

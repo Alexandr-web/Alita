@@ -19,9 +19,9 @@ const Product = sequelize.define("product", {
   },
   category: { type: DataTypes.STRING, },
   id: {
-    primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: true,
+    primaryKey: true,
   },
 }, { tableName: "product", });
 

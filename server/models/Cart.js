@@ -6,9 +6,9 @@ const Cart = sequelize.define("cart", {
     defaultValue: [],
   },
   id: {
-    primaryKey: true,
     type: DataTypes.INTEGER,
     autoIncrement: true,
+    primaryKey: true,
   },
 }, { tableName: "cart", });
 
