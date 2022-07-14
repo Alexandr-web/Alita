@@ -1,1 +1,92 @@
 @import "./_global";
+
+.page {
+  min-height: inherit;
+
+  &__inner {
+    min-height: inherit;
+  }
+}
+
+.auth {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+
+  &__form {
+    width: 700px;
+  }
+
+  &__title {
+    margin-bottom: 15px;
+    @extend %roboto-400;
+    text-align: center;
+  }
+
+  &__help {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-desc {
+      @extend %roboto-300;
+      font-size: 15px;
+    }
+
+    &-link {
+      color: $blue;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__field {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    width: 100%;
+    display: block;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    background: $lightGrey;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: color, background, border, .3s;
+
+    &--invalid {
+      background: $lightRed;
+      color: $middleRed;
+      border: 1px solid $middleRed;
+    }
+  }
+
+  &__submit-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__submit {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    background: $black;
+    color: $white;
+  }
+}

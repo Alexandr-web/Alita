@@ -32,6 +32,22 @@ img {
   height: auto;
 }
 
+input[type=button],
+input[type=submit],
+button {
+  &[disabled] {
+    opacity: .8;
+    cursor: not-allowed;
+  }
+}
+
+#__nuxt,
+#__layout,
+#__layout>div {
+  min-height: 100vh;
+  height: 100%;
+}
+
 .container {
   max-width: 1500px;
   padding: 0 10px;
