@@ -1,4 +1,4 @@
-## OnlineStore
+# Alita
 
 This is an online store where you can buy and sell items of different categories. This project is written on the PEVN stack
 
