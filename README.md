@@ -8,6 +8,18 @@ This is an online store where you can buy and sell items of different categories
 
 <img src="./readmeImages/home.jpg" alt="home page" />
 
+### Page "My products"
+
+<img src="./readmeImages/MyProduct.jpg" alt="My products" />
+
+### Cart page
+
+<img src="./readmeImages/cart.jpg" alt="cart page" />
+
+### Settings page
+
+<img src="./readmeImages/settings.jpg" alt="settings page" />
+
 ## Build Setup
 
 ```bash

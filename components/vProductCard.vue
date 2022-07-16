@@ -39,10 +39,18 @@
     </nuxt-link>
     <footer class="product__footer">
       <button
+        v-if="!noAddToCart"
         class="product__btn product__btn-add-to-cart"
         @click="$emit('addToCart', product)"
       >
         Добавить в корзину
+      </button>
+      <button
+        v-if="!noRemoveFromCart"
+        class="product__btn product__btn-remove-from-cart"
+        @click="$emit('removeFromCart', product)"
+      >
+        Удалить из корзины
       </button>
     </footer>
   </div>
@@ -56,6 +64,8 @@
         type: Object,
         required: true,
       },
+      noAddToCart: { type: Boolean, },
+      noRemoveFromCart: { type: Boolean, },
     },
     data: () => ({
       images: [

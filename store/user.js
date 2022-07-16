@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 const host = require("../server/host");
 
 export default {
@@ -10,6 +12,16 @@ export default {
         });
 
         return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async getByToken({ }, token) {
+      try {
+        const data = await jwtDecode(token);
+
+        return data;
       } catch (err) {
         throw err;
       }

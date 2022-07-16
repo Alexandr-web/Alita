@@ -12,7 +12,15 @@
           <h3 class="section__title">
             Товары
           </h3>
-          <vProductsList />
+          <ul class="products">
+            <vProductCard
+              v-for="i in 8"
+              :key="i"
+              :product="{}"
+              :no-remove-from-cart="true"
+              @addToCart="addToCart"
+            />
+          </ul>
         </div>
       </div>
     </div>
@@ -21,13 +29,18 @@
 
 <script>
   import vCategoriesList from "@/components/vCategoriesList";
-  import vProductsList from "@/components/vProductsList";
+  import vProductCard from "@/components/vProductCard";
 
   export default {
     name: "IndexPage",
     components: {
       vCategoriesList,
-      vProductsList,
+      vProductCard,
+    },
+    methods: {
+      addToCart(product) {
+        console.log(product);
+      },
     },
   };
 </script>

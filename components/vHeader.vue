@@ -21,12 +21,13 @@
           </div>
         </div>
         <nuxt-link
+          v-if="Object.keys(user).length"
           class="header__user-info header__block"
-          to="/user/id?tab=info"
+          :to="`/profile/${user.id}?tab=products`"
         >
           <vUserIcon :classes="['header__user-icon']" />
           <h3 class="header__user-name">
-            alexandr
+            {{ user.name }}
           </h3>
         </nuxt-link>
       </div>
@@ -50,6 +51,17 @@
           model: "",
         },
       },
+      user: {},
     }),
+    async fetch() {
+      try {
+        const token = this.$store.getters["auth/getToken"];
+        const user = await this.$store.dispatch("user/getByToken", token);
+
+        this.user = user || {};
+      } catch (err) {  
+        throw err;
+      }
+    },
   };
 </script>

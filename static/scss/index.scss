@@ -274,13 +274,137 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 8px;
-    background: $lightBlue;
-    color: $blue;
     margin: 0 auto;
     display: block;
+
+    &-add-to-cart {
+      background: $lightBlue;
+      color: $blue;
+    }
+
+    &-remove-from-cart {
+      color: $middleRed;
+      background: $lightRed;
+    }
   }
 
   &__main {
     padding-top: 15px;
+  }
+}
+
+.profile {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+
+  &__sidebar {
+    background: $white;
+    position: sticky;
+    top: 90px;
+    min-width: 400px;
+    height: max-content;
+    overflow: auto;
+    border: 1px solid $lightGrey;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+
+    &-block {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+        border-bottom: 1px solid $lightGrey;
+        padding-bottom: 10px;
+      }
+    }
+
+    &-user {
+      &-info {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      &-avatar-block {
+        width: 250px;
+        height: 250px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      &-avatar {
+        width: 100%;
+      }
+
+      &-name {
+        @extend %roboto-400;
+        margin-bottom: 4px;
+      }
+
+      &-email {
+        opacity: .8;
+        @extend %roboto-300;
+      }
+    }
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+
+      &-item {
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+      }
+
+      &-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 10px;
+        background: $lightGrey;
+        color: $grey;
+        transition: color, background, .3s;
+
+        &:hover {
+          color: $blue;
+          background: $lightBlue;
+        }
+
+        &--active {
+          color: $blue;
+          background: $lightBlue;
+        }
+      }
+    }
+  }
+
+  &__main {
+    width: 100%;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__tab {
+    display: flex;
+    flex-direction: column;
+
+    &-title {
+      @extend %roboto-400;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__products-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
   }
 }
