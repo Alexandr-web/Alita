@@ -8,9 +8,9 @@ This is an online store where you can buy and sell items of different categories
 
 <img src="./readmeImages/home.jpg" alt="home page" />
 
-### Page "My products"
+### My products page
 
-<img src="./readmeImages/MyProduct.jpg" alt="My products" />
+<img src="./readmeImages/MyProduct.jpg" alt="my products page" />
 
 ### Cart page
 
