@@ -14,7 +14,7 @@
     <li class="categories-list__item">
       <nuxt-link
         class="categories-list__link"
-        to="/products?category="
+        to="/products?category=electronics"
       >
         <vElectronicIcon :classes="['categories-list__icon']" />
         <h5 class="categories-list__title">
@@ -25,7 +25,7 @@
     <li class="categories-list__item">
       <nuxt-link
         class="categories-list__link"
-        to="/products?category="
+        to="/products?category=auto"
       >
         <vCarIcon :classes="['categories-list__icon']" />
         <h5 class="categories-list__title">
@@ -36,7 +36,7 @@
     <li class="categories-list__item">
       <nuxt-link
         class="categories-list__link"
-        to="/products?category="
+        to="/products?category=other"
       >
         <vDotsIcon :classes="['categories-list__icon']" />
         <h5 class="categories-list__title">

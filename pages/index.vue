@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <div class="page pt-90">
     <div class="container">
-      <div class="page__inner pt-90">
+      <div class="page__inner">
         <div class="section">
           <h3 class="section__title">
             Категории

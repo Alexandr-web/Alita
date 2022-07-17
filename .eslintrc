@@ -87,6 +87,8 @@
     "no-confusing-arrow": "off",
     "prefer-object-spread": "off",
     "default-case": "off",
-    "no-debugger": "off"
+    "no-debugger": "off",
+    "no-restricted-globals": "off",
+    "func-names": "off"
   }
 }
