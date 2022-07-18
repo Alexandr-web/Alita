@@ -18,6 +18,8 @@
               :key="i"
               :product="{}"
               :no-remove-from-cart="true"
+              :no-edit="true"
+              :no-quantity-controls="true"
               @addToCart="addToCart"
             />
           </ul>

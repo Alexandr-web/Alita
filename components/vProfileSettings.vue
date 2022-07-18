@@ -16,6 +16,9 @@
             id="name"
             v-model.trim="validations.name.model"
             class="form__input"
+            :class="{
+              'form__input--invalid': validations.name.$invalid
+            }"
             type="text"
             placeholder="Имя"
           >
@@ -30,6 +33,9 @@
             id="email"
             v-model.trim="validations.email.model"
             class="form__input"
+            :class="{
+              'form__input--invalid': validations.email.$invalid
+            }"
             type="text"
             placeholder="Email"
           >
@@ -44,6 +50,9 @@
             id="password"
             v-model.trim="validations.password.model"
             class="form__input"
+            :class="{
+              'form__input--invalid': validations.password.$invalid
+            }"
             type="password"
             placeholder="Пароль"
           >

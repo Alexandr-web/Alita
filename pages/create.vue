@@ -163,10 +163,12 @@
 
 <script>
   import vCameraIcon from "@/components/icons/vCameraIcon";
+  import getValidNumMixin from "@/mixins/getValidNumMixin";
 
   export default {
     name: "CreateProductPage",
     components: { vCameraIcon, },
+    mixins: [getValidNumMixin],
     layout: "default",
     data: () => ({
       pending: false,
@@ -196,15 +198,10 @@
     }),
     watch: {
       "validations.price.model": function (val) {
-        const numberFormat = Intl.NumberFormat("ru-RU", {
-          minimumFractionDigits: 0,
-          currencyDisplay: "narrowSymbol",
-        });
-
         const numStr = val.replace(/\s/g, "");
 
         if (!isNaN(parseInt(numStr))) {
-          this.validations.price.model = numberFormat.format(numStr);
+          this.validations.price.model = this.getValidNum(numStr);
         } else {
           this.validations.price.model = "";
         }

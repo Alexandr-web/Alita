@@ -26,6 +26,14 @@
             {{ item.title }}
           </nuxt-link>
         </li>
+        <li class="profile__sidebar-list-item">
+          <nuxt-link
+            class="profile__sidebar-list-link"
+            to="/create"
+          >
+            Создать товар
+          </nuxt-link>
+        </li>
       </ul>
     </div>
   </aside>

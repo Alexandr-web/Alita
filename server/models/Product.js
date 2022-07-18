@@ -8,10 +8,6 @@ const Product = sequelize.define("product", {
     defaultValue: [],
   },
   price: { type: DataTypes.INTEGER, },
-  amount: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-  },
   rating: { type: DataTypes.INTEGER, },
   raters: {
     type: DataTypes.ARRAY(DataTypes.INTEGER),

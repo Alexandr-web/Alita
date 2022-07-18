@@ -9,6 +9,7 @@
         :key="i"
         :product="{}"
         :no-add-to-cart="true"
+        :no-quantity-controls="true"
         :no-remove-from-cart="true"
       />
     </ul>

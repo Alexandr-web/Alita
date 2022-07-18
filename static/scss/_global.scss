@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@500&family=Roboto:wght@300;400;500&display=swap');
 @import "../../node_modules/normalize.css/normalize.css";
 @import "./_vars";
 
@@ -36,7 +36,7 @@ input[type=button],
 input[type=submit],
 button {
   &[disabled] {
-    opacity: .8;
+    opacity: .6;
     cursor: not-allowed;
   }
 }

@@ -38,27 +38,63 @@
       </main>
     </nuxt-link>
     <footer class="product__footer">
-      <button
-        v-if="!noAddToCart"
-        class="product__btn product__btn-add-to-cart"
-        @click="$emit('addToCart', product)"
+      <div class="product__footer-block">
+        <button
+          v-if="!noAddToCart"
+          class="product__btn product__btn-add-to-cart"
+          @click="$emit('addToCart', product)"
+        >
+          Добавить в корзину
+        </button>
+        <button
+          v-if="!noEdit"
+          class="product__btn product__btn-edit"
+          @click="$emit('edit', product)"
+        >
+          Редактировать
+        </button>
+        <button
+          v-if="!noRemoveFromCart"
+          class="product__btn product__btn-remove-from-cart"
+          @click="$emit('removeFromCart', product)"
+        >
+          Удалить из корзины
+        </button>
+      </div>
+      <div
+        v-if="!noQuantityControls"
+        class="product__footer-block product__quantity"
       >
-        Добавить в корзину
-      </button>
-      <button
-        v-if="!noRemoveFromCart"
-        class="product__btn product__btn-remove-from-cart"
-        @click="$emit('removeFromCart', product)"
-      >
-        Удалить из корзины
-      </button>
+        <div class="product__quantity-controls">
+          <button
+            class="product__quantity-controls-btn"
+            :disabled="quantity === 1"
+            @click="quantity -= quantity > 1 ? 1 : 0"
+          >
+            -
+          </button>
+          <span class="product__quantity-value">{{ quantity }}</span>
+          <button
+            class="product__quantity-controls-btn"
+            @click="quantity++"
+          >
+            +
+          </button>
+        </div>
+        <div class="product__quantity-price">
+          {{ getValidNum(300 * quantity, true) }}
+        </div>
+      </div>
     </footer>
   </div>
 </template>
 
 <script>
+  import getValidNumMixin from "@/mixins/getValidNumMixin";
+
   export default {
     name: "ProductCardComponent",
+    mixins: [getValidNumMixin],
     props: {
       product: {
         type: Object,
@@ -66,6 +102,8 @@
       },
       noAddToCart: { type: Boolean, },
       noRemoveFromCart: { type: Boolean, },
+      noEdit: { type: Boolean, },
+      noQuantityControls: { type: Boolean, },
     },
     data: () => ({
       images: [
@@ -84,6 +122,7 @@
       ],
       listImagesParts: [],
       activePart: 0,
+      quantity: 1,
     }),
     methods: {
       setListImagesParts() {

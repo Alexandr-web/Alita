@@ -13,6 +13,11 @@
   font-family: "Roboto", sans-serif;
 }
 
+%ibarra-real-nova-400 {
+  font-weight: 400;
+  font-family: 'Ibarra Real Nova', serif;
+}
+
 $lightGrey: #F2F2F2;
 $grey: #8F8F8F;
 $black: #101010;
@@ -23,4 +28,4 @@ $middleRed: #EC9BA9;
 $lightBlue: #F1F4FF;
 $opacityLightBlue: rgba(241, 244, 255, .6);
 $opacityLightGrey: rgba(242, 242, 242, .8);
-$opacityGrey: tgba(143, 143, 143, .8);
+$opacityGrey: rgba(143, 143, 143, .8);
