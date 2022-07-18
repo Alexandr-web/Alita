@@ -299,8 +299,12 @@
     border-radius: 8px;
     margin: 0 auto;
     display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &-add-to-cart {
+    &-add-to-cart,
+    &-edit {
       background: $lightBlue;
       color: $blue;
     }

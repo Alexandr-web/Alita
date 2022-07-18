@@ -46,13 +46,14 @@
         >
           Добавить в корзину
         </button>
-        <button
+        <nuxt-link
           v-if="!noEdit"
           class="product__btn product__btn-edit"
+          :to="`/product/${product.id}/edit`"
           @click="$emit('edit', product)"
         >
           Редактировать
-        </button>
+        </nuxt-link>
         <button
           v-if="!noRemoveFromCart"
           class="product__btn product__btn-remove-from-cart"

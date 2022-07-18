@@ -10,6 +10,7 @@ require("./models/index");
 
 const authRouter = require("./routers/auth.router");
 const userRouter = require("./routers/user.router");
+const productRouter = require("./routers/product.router");
 
 app.use(cors({ origin: [host], }));
 app.use(bodyParser.urlencoded({ extended: true, }));
@@ -28,6 +29,7 @@ const connectToDatabase = async () => {
 
 connectToDatabase();
 
+app.use("/product", productRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 
