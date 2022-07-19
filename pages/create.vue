@@ -75,13 +75,13 @@
               <div class="form__field">
                 <label
                   class="form__label"
-                  for="desc"
+                  for="description"
                 >
                   <textarea
-                    id="desc"
-                    v-model.trim="validations.desc.model"
+                    id="description"
+                    v-model.trim="validations.description.model"
                     class="form__input form__textarea"
-                    :class="{ 'form__input--invalid': validations.desc.$invalid, }"
+                    :class="{ 'form__input--invalid': validations.description.$invalid, }"
                     type="text"
                     placeholder="Описание"
                   ></textarea>
@@ -183,10 +183,10 @@
           },
           model: "",
         },
-        desc: {
+        description: {
           rules: {
             required: true,
-            maxLength: 60,
+            maxLength: 200,
           },
           model: "",
         },

@@ -589,3 +589,153 @@
     fill: $blue;
   }
 }
+
+.slider {
+  height: 100%;
+
+  &__slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.swiper__wrapper {
+  height: 100%;
+}
+
+.product-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__pictures {
+    height: 85vh;
+  }
+
+  &__rating {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+
+    &-val {
+      display: inline-block;
+      margin-top: 5px;
+      @extend %roboto-300;
+      font-size: 15px;
+    }
+  }
+
+  &__stars {
+    display: flex;
+    align-items: center;
+  }
+
+  &__image {
+    height: 100%;
+  }
+
+  &__block {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+
+    &-row {
+      &:not(:last-child) {
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  &__title {
+    @extend %roboto-400;
+  }
+
+  &__star {
+    &:not(:last-child) {
+      margin-right: 2px;
+    }
+
+    &-icon {
+      width: 25px;
+      fill: $lightGrey;
+
+      &--active {
+        fill: $gold;
+      }
+    }
+  }
+
+  &__desc {
+    line-height: 23px;
+    font-size: 19px;
+    max-width: 600px;
+    color: $grey;
+  }
+
+  &__price {
+    color: $blue;
+    @extend %roboto-500;
+    margin: 10px 0;
+  }
+
+  &__reviews {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__review {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid $lightGrey;
+    border-radius: 5px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &-block {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+
+    &-stars {
+      display: flex;
+      align-items: center;
+    }
+
+    &-user {
+      display: flex;
+      align-items: center;
+
+      &-icon {
+        width: 35px;
+        margin-right: 15px;
+      }
+
+      &-name {
+        @extend %roboto-400;
+      }
+    }
+
+    &-star {
+      &:not(:last-child) {
+        margin-right: 2px;
+      }
+
+      &-icon {
+        fill: $lightGrey;
+        width: 20px;
+
+        &--active {
+          fill: $gold;
+        }
+      }
+    }
+  }
+}

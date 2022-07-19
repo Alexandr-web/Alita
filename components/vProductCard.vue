@@ -2,7 +2,7 @@
   <div class="product">
     <nuxt-link
       class="product__link"
-      to="/products/id"
+      to="/product/1"
     >
       <header class="product__header">
         <ul

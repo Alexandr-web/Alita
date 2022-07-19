@@ -75,13 +75,13 @@
               <div class="form__field">
                 <label
                   class="form__label"
-                  for="desc"
+                  for="description"
                 >
                   <textarea
-                    id="desc"
-                    v-model.trim="validations.desc.model"
+                    id="description"
+                    v-model.trim="validations.description.model"
                     class="form__input form__textarea"
-                    :class="{ 'form__input--invalid': validations.desc.$invalid, }"
+                    :class="{ 'form__input--invalid': validations.description.$invalid, }"
                     type="text"
                     placeholder="Описание"
                   ></textarea>
@@ -190,10 +190,10 @@
           },
           model: "",
         },
-        desc: {
+        description: {
           rules: {
             required: true,
-            maxLength: 60,
+            maxLength: 200,
           },
           model: "",
         },
@@ -215,13 +215,14 @@
       },
     },
     methods: {
-      create() {
+      edit() {
         if (!this.validations.$invalid && this.files.length && this.category !== "none") {
           const fd = new FormData();
 
           this.files.map(({ file, }) => fd.append("images", file));
 
           fd.append("category", this.category);
+          fd.append("productId", this.$route.params.id);
           
           Object.keys(this.validations).map((key) => {
             if (this.validations[key].model && key !== "price") {

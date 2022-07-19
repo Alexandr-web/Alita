@@ -28,6 +28,11 @@ This is an online store where you can buy and sell items of different categories
 
 <img src="./readmeImages/editProduct.jpg" alt="edit product page" />
 
+### Product page
+
+<img src="./readmeImages/product.jpg" alt="product page" />
+<img src="./readmeImages/product2.jpg" alt="product page" />
+
 ## Build Setup
 
 ```bash
