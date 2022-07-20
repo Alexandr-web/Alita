@@ -211,8 +211,9 @@
       create() {
         if (!this.validations.$invalid && this.files.length && this.category !== "none") {
           const fd = new FormData();
+          const token = this.$store.getters["auth/getToken"];
 
-          this.files.map(({ file, }) => fd.append("images", file));
+          this.files.map(({ file, }) => fd.append("productImages", file));
 
           fd.append("category", this.category);
           
@@ -223,6 +224,19 @@
 
             if (key === "price") {
               fd.append(key, this.validations[key].model.replace(/\s/g, ""));
+            }
+          });
+
+          const res = this.$store.dispatch("product/add", { fd, token, });
+
+          this.pending = true;
+
+          res.then(({ ok, message, }) => {
+            this.pending = false;
+            alert(message);
+
+            if (ok) {
+              this.$router.push("/");
             }
           });
         } else {

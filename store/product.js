@@ -14,5 +14,35 @@ export default {
         throw err;
       }
     },
+
+    async getAll({ }, { category = "", search = "", }) {
+      try {
+        const res = await fetch(`${host}/product/api/?category=${category}&search=${search}`, {
+          method: "GET",
+          headers: { "Accept-Type": "application/json", },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async add({ }, { fd, token = "", }) {
+      try {
+        const res = await fetch(`${host}/product/add`, {
+          method: "POST",
+          headers: {
+            "Accept-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: fd,
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
   },
 };

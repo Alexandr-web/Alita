@@ -261,9 +261,11 @@
 
     &-item {
       display: none;
+      justify-content: center;
+      align-items: center;
 
       &--active {
-        display: block;
+        display: flex;
       }
     }
   }
@@ -679,63 +681,5 @@
     color: $blue;
     @extend %roboto-500;
     margin: 10px 0;
-  }
-
-  &__reviews {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__review {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid $lightGrey;
-    border-radius: 5px;
-
-    &:not(:last-child) {
-      margin-bottom: 10px;
-    }
-
-    &-block {
-      &:not(:last-child) {
-        margin-right: 10px;
-      }
-    }
-
-    &-stars {
-      display: flex;
-      align-items: center;
-    }
-
-    &-user {
-      display: flex;
-      align-items: center;
-
-      &-icon {
-        width: 35px;
-        margin-right: 15px;
-      }
-
-      &-name {
-        @extend %roboto-400;
-      }
-    }
-
-    &-star {
-      &:not(:last-child) {
-        margin-right: 2px;
-      }
-
-      &-icon {
-        fill: $lightGrey;
-        width: 20px;
-
-        &--active {
-          fill: $gold;
-        }
-      }
-    }
   }
 }

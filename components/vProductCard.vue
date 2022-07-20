@@ -2,7 +2,7 @@
   <div class="product">
     <nuxt-link
       class="product__link"
-      to="/product/1"
+      :to="`/product/${product.id}`"
     >
       <header class="product__header">
         <ul
@@ -27,13 +27,13 @@
           </li>
         </ul>
         <h3 class="product__title">
-          Hoodie Nike
-          <span class="product__price">$299</span>
+          {{ product.title }}
+          <span class="product__price">{{ getValidNum(product.price, true) }}</span>
         </h3>
       </header>
       <main class="product__main">
         <p class="product__desc">
-          Далеко-далеко за словесными, горами в стране гласных и согласных живут рыбные тексты.
+          {{ product.description }}
         </p>
       </main>
     </nuxt-link>
@@ -107,24 +107,14 @@
       noQuantityControls: { type: Boolean, },
     },
     data: () => ({
-      images: [
-        {
-          active: true,
-          url: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/7c5aa030-a6bc-4a12-b414-253f7a41540c/therma-mens-pullover-training-hoodie-zTst4l.png",
-        },
-        {
-          active: false,
-          url: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/a42fd89c-cfb0-4eb1-9937-fb392cdfb2c3/sportswear-mens-keep-it-clean-pullover-hoodie-NKvBgP.png",
-        },
-        {
-          active: false,
-          url: "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/90149434-4a6d-45f3-852c-97ca35692a70/sportswear-club-fleece-mens-graphic-pullover-hoodie-0js5Sx.png",
-        }
-      ],
+      images: [],
       listImagesParts: [],
       activePart: 0,
       quantity: 1,
     }),
+    mounted() {
+      this.product.images.map((url, index) => this.images.push({ active: index === 0, url, }));
+    },
     methods: {
       setListImagesParts() {
         const listImages = this.$refs.images;
