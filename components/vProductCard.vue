@@ -1,6 +1,7 @@
 <template>
   <div class="product">
     <nuxt-link
+      v-if="images.length"
       class="product__link"
       :to="`/product/${product.id}`"
     >
@@ -92,10 +93,11 @@
 
 <script>
   import getValidNumMixin from "@/mixins/getValidNumMixin";
+  import getValidProductImageMixin from "@/mixins/getValidProductImageMixin";
 
   export default {
     name: "ProductCardComponent",
-    mixins: [getValidNumMixin],
+    mixins: [getValidNumMixin, getValidProductImageMixin],
     props: {
       product: {
         type: Object,
@@ -113,7 +115,9 @@
       quantity: 1,
     }),
     mounted() {
-      this.product.images.map((url, index) => this.images.push({ active: index === 0, url, }));
+      this.product.images.map((url, index) => {
+        this.getValidProductImage(url).then((path) => this.images.push({ active: index === 0, url: path, }));
+      });
     },
     methods: {
       setListImagesParts() {

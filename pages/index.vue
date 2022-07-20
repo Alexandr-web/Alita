@@ -50,17 +50,7 @@
         const { ok, products, } = await this.$store.dispatch("product/getAll", {});
         
         if (ok) {
-          products.map((product) => {
-            const images = [];
-
-            product.images
-              .map((path) => this.getValidProductImage(path))
-              .map((promise) => promise.then((url) => images.push(url)));
-            
-            if (images) {
-              this.products.push({ ...product, images, });
-            }
-          });
+          this.products = products;
         }
       } catch (err) {
         throw err;

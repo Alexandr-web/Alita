@@ -2,15 +2,21 @@
   <div class="page pt-90">
     <div class="container">
       <div class="page__inner">
-        <div class="product-view">
-          <div class="product-view__block product-view__pictures">
+        <div
+          v-if="Object.keys(product).length"
+          class="product-view"
+        >
+          <div
+            v-if="images.length"
+            class="product-view__block product-view__pictures"
+          >
             <clientOnly>
               <Swiper
                 class="swiper__wrapper"
                 :options="sliderOptions"
               >
                 <SwiperSlide
-                  v-for="(image, index) in product.images"
+                  v-for="(image, index) in images"
                   :key="index"
                   class="slider__slide"
                 >
@@ -87,6 +93,7 @@
         grabCursor: true,
         spaceBetween: 10,
       },
+      images: [],
       product: {},
     }),
     async fetch() {
@@ -95,15 +102,15 @@
         const { ok, product, } = await this.$store.dispatch("product/getOne", parseInt(id));
 
         if (ok) {
-          const images = [];
+          this.product = product;
 
-          product.images
-            .map((url) => this.getValidProductImage(url))
-            .map((promise) => promise.then((url) => images.push(url)));
-
-          if (images) {
-            this.product = { ...product, images, };
-          }
+          product.images.map((url) => {
+            this.getValidProductImage(url).then((path) => {
+              this.images.push(path);
+            }).catch((err) => {
+              throw err;
+            });
+          });
         }
       } catch (err) {
         throw err;
