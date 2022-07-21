@@ -619,13 +619,6 @@
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-
-    &-val {
-      display: inline-block;
-      margin-top: 5px;
-      @extend %roboto-300;
-      font-size: 15px;
-    }
   }
 
   &__stars {

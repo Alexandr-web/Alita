@@ -186,14 +186,14 @@
         title: {
           rules: {
             required: true,
-            maxLength: 25,
+            maxLength: 40,
           },
           model: "",
         },
         description: {
           rules: {
             required: true,
-            maxLength: 200,
+            maxLength: 400,
           },
           model: "",
         },

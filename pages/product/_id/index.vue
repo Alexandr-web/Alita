@@ -34,7 +34,7 @@
                 {{ product.title }}
               </h1>
               <h1 class="product-view__price">
-                {{ getValidNum(1000, true) }}
+                {{ getValidNum(product.price, true) }}
               </h1>
               <p class="product-view__desc">
                 {{ product.description }}
@@ -51,7 +51,6 @@
                     <vStarIcon :classes="['product-view__star-icon', i <= product.rating ? 'product-view__star-icon--active' : false]" />
                   </li>
                 </ul>
-                <span class="product-view__rating-val">Всего оценок: {{ product.raters.length }}</span>
               </div>
               <button class="product__btn product__btn-add-to-cart product-view__btn">
                 Добавить в корзину

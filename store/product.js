@@ -28,15 +28,33 @@ export default {
       }
     },
 
-    async add({ }, { fd, token = "", }) {
+    async add({ }, { fd, token, }) {
       try {
         const res = await fetch(`${host}/product/add`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token || ""}`,
           },
           body: fd,
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async addToCart({ }, { id, token, }) {
+      try {
+        const res = await fetch(`${host}/product/cart/add`, {
+          method: "POST",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify({ id, }),
         });
 
         return res.json();

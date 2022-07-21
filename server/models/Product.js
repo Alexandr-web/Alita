@@ -12,10 +12,6 @@ const Product = sequelize.define("product", {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
-  raters: {
-    type: DataTypes.ARRAY(DataTypes.INTEGER),
-    defaultValue: [],
-  },
   category: { type: DataTypes.STRING, },
   id: {
     type: DataTypes.INTEGER,

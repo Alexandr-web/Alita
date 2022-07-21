@@ -23,6 +23,7 @@
               :no-remove-from-cart="true"
               :no-edit="true"
               :no-quantity-controls="true"
+              :pending-add-to-cart="pendingAddToCart"
               @addToCart="addToCart"
             />
           </ul>
@@ -35,7 +36,6 @@
 <script>
   import vCategoriesList from "@/components/vCategoriesList";
   import vProductCard from "@/components/vProductCard";
-  import getValidProductImageMixin from "@/mixins/getValidProductImageMixin";
 
   export default {
     name: "IndexPage",
@@ -43,8 +43,10 @@
       vCategoriesList,
       vProductCard,
     },
-    mixins: [getValidProductImageMixin],
-    data: () => ({ products: [], }),
+    data: () => ({
+      products: [],
+      pendingAddToCart: false,
+    }),
     async fetch() {
       try {
         const { ok, products, } = await this.$store.dispatch("product/getAll", {});
@@ -57,8 +59,17 @@
       }
     },
     methods: {
-      addToCart(product) {
-        console.log(product);
+      addToCart({ id, }) {
+        const token = this.$store.getters["auth/getToken"];
+        const res = this.$store.dispatch("product/addToCart", { id, token, });
+
+        this.pendingAddToCart = true;
+
+        res.then(({ message, }) => {
+          this.pendingAddToCart = false;
+
+          alert(message);
+        });
       },
     },
   };

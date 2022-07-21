@@ -1,4 +1,6 @@
 const ProductModel = require("../models/Product");
+const Cart = require("../models/Cart");
+const CartProduct = require("../models/CartProduct");
 
 class Product {
   async getOne(req, res) {
@@ -62,6 +64,62 @@ class Product {
       await ProductModel.create(productData);
 
       return res.status(200).json({ ok: true, message: "Товар создан", });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", });
+    }
+  }
+
+  async addToCart(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения следующей операции нужно быть авторизованным", });
+      }
+
+      const { id, } = req.body;
+      const product = await ProductModel.findOne({ where: { id, }, });
+
+      if (!product) {
+        return res.status(404).json({ ok: false, message: "Такого товара не существует", });
+      }
+
+      const cart = await Cart.findOne({ where: { userId: req.userId, }, });
+      const userCartProducts = await CartProduct.findAll({ where: { cartId: cart.id, }, });
+      const createNewCartProduct = async () => {
+        const productData = Object.keys(product.dataValues).reduce((acc, key) => {
+          if (!["id", "userId"].includes(key)) {
+            acc[key] = product.dataValues[key];
+          }
+
+          return acc;
+        }, {});
+        const dataCartProduct = {
+          ...productData,
+          cartId: cart.id,
+          productId: parseInt(id),
+          quantity: 1,
+        };
+
+        await CartProduct.create(dataCartProduct);
+      };
+
+      if (userCartProducts && userCartProducts.length) {
+        const findIndexProduct = userCartProducts.findIndex(({ productId, }) => productId === parseInt(id));
+
+        if (findIndexProduct !== -1) {
+          const findProduct = userCartProducts[findIndexProduct];
+
+          await findProduct.update({ quantity: findProduct.quantity + 1, });
+          await findProduct.save();
+        } else {
+          createNewCartProduct();
+        }
+      } else {
+        createNewCartProduct();
+      }
+
+      return res.status(200).json({ ok: true, message: "Товар добавлен в корзину", });
     } catch (err) {
       console.log(err);
 

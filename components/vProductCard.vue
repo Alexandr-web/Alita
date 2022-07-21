@@ -43,6 +43,7 @@
         <button
           v-if="!noAddToCart"
           class="product__btn product__btn-add-to-cart"
+          :disabled="pendingAddToCart"
           @click="$emit('addToCart', product)"
         >
           Добавить в корзину
@@ -70,21 +71,21 @@
         <div class="product__quantity-controls">
           <button
             class="product__quantity-controls-btn"
-            :disabled="quantity === 1"
-            @click="quantity -= quantity > 1 ? 1 : 0"
+            :disabled="product.quantity === 1"
+            @click="$emit('setQuantity', { quantity: product.quantity - 1, productId: product.id, })"
           >
             -
           </button>
-          <span class="product__quantity-value">{{ quantity }}</span>
+          <span class="product__quantity-value">{{ product.quantity }}</span>
           <button
             class="product__quantity-controls-btn"
-            @click="quantity++"
+            @click="$emit('setQuantity', { quantity: product.quantity + 1, productId: product.id, })"
           >
             +
           </button>
         </div>
         <div class="product__quantity-price">
-          {{ getValidNum(300 * quantity, true) }}
+          {{ getValidNum(product.price * product.quantity, true) }}
         </div>
       </div>
     </footer>
@@ -103,6 +104,7 @@
         type: Object,
         required: true,
       },
+      pendingAddToCart: { type: Boolean, },
       noAddToCart: { type: Boolean, },
       noRemoveFromCart: { type: Boolean, },
       noEdit: { type: Boolean, },
@@ -112,7 +114,6 @@
       images: [],
       listImagesParts: [],
       activePart: 0,
-      quantity: 1,
     }),
     mounted() {
       this.product.images.map((url, index) => {
@@ -139,7 +140,6 @@
 
         this.setActiveImage(this.activePart);
       },
-
       setActiveImage(index) {
         this.images = this.images.map((image) => {
           image.active = false;
@@ -148,7 +148,6 @@
 
         this.images[index < 0 ? 0 : index].active = true;
       },
-
       leaveFromListImages() {
         this.setActiveImage(0);
         this.listImagesParts = [];

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Cart = require("../models/Cart");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -41,6 +42,8 @@ class Auth {
       }
 
       const token = jwt.sign(candidate.dataValues, process.env.SECRET_KEY, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60), });
+
+      await Cart.create({ userId: candidate.id, });
 
       return res.status(200).json({ ok: true, message: "Пользователь вошел", token: `Bearer ${token}`, });
     } catch (err) {
