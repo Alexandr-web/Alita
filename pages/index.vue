@@ -23,10 +23,12 @@
               :no-remove-from-cart="true"
               :no-edit="true"
               :no-quantity-controls="true"
+              :no-remove="true"
               :pending-add-to-cart="pendingAddToCart"
               @addToCart="addToCart"
             />
           </ul>
+          <vNothing v-else />
         </div>
       </div>
     </div>
@@ -36,12 +38,14 @@
 <script>
   import vCategoriesList from "@/components/vCategoriesList";
   import vProductCard from "@/components/vProductCard";
+  import vNothing from "@/components/vNothing";
 
   export default {
     name: "IndexPage",
     components: {
       vCategoriesList,
       vProductCard,
+      vNothing,
     },
     data: () => ({
       products: [],

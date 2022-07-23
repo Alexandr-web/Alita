@@ -9,6 +9,7 @@
             <vProfileCart v-if="$route.query.tab === 'cart'" />
             <vProfileSettings
               v-if="$route.query.tab === 'settings'"
+              :pending="pendingEditUserSettings"
               @edit="editUserData"
             />
           </main>
@@ -40,10 +41,23 @@
         throw err;
       });
     },
+    data: () => ({ pendingEditUserSettings: false, }),
     watchQuery: ["tab"],
     methods: {
       editUserData(fd) {
-        console.log(fd);
+        const token = this.$store.getters["auth/getToken"];
+        const { id, } = this.$route.params;
+        const res = this.$store.dispatch("user/edit", { fd, id, token, });
+
+        this.pendingEditUserSettings = true;
+
+        res.then(({ message, }) => {
+          this.pendingEditUserSettings = false;
+
+          alert(message);
+        }).catch((err) => {
+          throw err;
+        });
       },
     },
   };

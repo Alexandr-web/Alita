@@ -62,6 +62,7 @@
         <button
           class="form__submit"
           type="submit"
+          :disabled="pending"
         >
           Изменить
         </button>
@@ -73,6 +74,12 @@
 <script>
   export default {
     name: "ProfileCartComponent",
+    props: {
+      pending: {
+        type: Boolean,
+        required: true,
+      },
+    },
     data: () => ({
       user: {},
       validations: {

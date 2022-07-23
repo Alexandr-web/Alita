@@ -96,6 +96,7 @@
                     id="price"
                     v-model.trim="validations.price.model"
                     class="form__input"
+                    :class="{ 'form__input--invalid': validations.price.$invalid, }"
                     type="text"
                     placeholder="Цена"
                   >

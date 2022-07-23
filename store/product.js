@@ -47,14 +47,47 @@ export default {
 
     async addToCart({ }, { id, token, }) {
       try {
-        const res = await fetch(`${host}/product/cart/add`, {
+        const res = await fetch(`${host}/product/${id}/cart/add`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${token || ""}`,
           },
-          body: JSON.stringify({ id, }),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async remove({ }, { id, token, }) {
+      try {
+        const res = await fetch(`${host}/product/${id}/remove`, {
+          method: "DELETE",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async removeFromCart({ }, { id, token, }) {
+      try {
+        const res = await fetch(`${host}/product/${id}/cart/remove`, {
+          method: "DELETE",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
         });
 
         return res.json();

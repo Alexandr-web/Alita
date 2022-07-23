@@ -7,5 +7,6 @@ Cart.belongsTo(User);
 Product.belongsTo(User);
 CartProduct.belongsTo(Cart);
 CartProduct.belongsTo(Product);
+CartProduct.belongsTo(User);
 
 module.exports = [User, Cart, Product, CartProduct];

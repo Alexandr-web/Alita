@@ -27,11 +27,14 @@ export default {
       }
     },
 
-    async getCartProducts({ }, id) {
+    async getCartProducts({ }, { id, token, }) {
       try {
         const res = await fetch(`${host}/user/api/${id}/cart`, {
           method: "GET",
-          headers: { "Accept-Type": "application/json", },
+          headers: {
+            "Accept-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
         });
 
         return res.json();
@@ -40,11 +43,32 @@ export default {
       }
     },
 
-    async getProducts({ }, id) {
+    async getProducts({ }, { id, token, }) {
       try {
         const res = await fetch(`${host}/user/api/${id}/products`, {
           method: "GET",
-          headers: { "Accept-Type": "application/json", },
+          headers: {
+            "Accept-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async edit({ }, { fd, token, id, }) {
+      try {
+        const res = await fetch(`${host}/user/${id}/edit`, {
+          method: "PUT",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(fd),
         });
 
         return res.json();

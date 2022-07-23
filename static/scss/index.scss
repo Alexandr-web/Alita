@@ -311,7 +311,8 @@
       color: $blue;
     }
 
-    &-remove-from-cart {
+    &-remove-from-cart,
+    &-remove {
       color: $middleRed;
       background: $lightRed;
     }
@@ -326,6 +327,9 @@
     flex-direction: column;
 
     &-block {
+      display: flex;
+      align-items: center;
+
       &:not(:last-child) {
         margin-bottom: 10px;
       }
@@ -674,5 +678,16 @@
     color: $blue;
     @extend %roboto-500;
     margin: 10px 0;
+  }
+}
+
+.nothing {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+
+  &__title {
+    @extend %roboto-300;
+    color: $grey;
   }
 }

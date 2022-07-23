@@ -59,9 +59,18 @@
         <button
           v-if="!noRemoveFromCart"
           class="product__btn product__btn-remove-from-cart"
+          :disabled="pendingRemoveFromCart"
           @click="$emit('removeFromCart', product)"
         >
           Удалить из корзины
+        </button>
+        <button
+          v-if="!noRemove"
+          class="product__btn product__btn-remove"
+          :disabled="pendingRemoveProduct"
+          @click="$emit('remove', product)"
+        >
+          Удалить
         </button>
       </div>
       <div
@@ -105,10 +114,13 @@
         required: true,
       },
       pendingAddToCart: { type: Boolean, },
+      pendingRemoveProduct: { type: Boolean, },
+      pendingRemoveFromCart: { type: Boolean, },
       noAddToCart: { type: Boolean, },
       noRemoveFromCart: { type: Boolean, },
       noEdit: { type: Boolean, },
       noQuantityControls: { type: Boolean, },
+      noRemove: { type: Boolean, },
     },
     data: () => ({
       images: [],

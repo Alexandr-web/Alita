@@ -52,7 +52,11 @@
                   </li>
                 </ul>
               </div>
-              <button class="product__btn product__btn-add-to-cart product-view__btn">
+              <button
+                class="product__btn product__btn-add-to-cart product-view__btn"
+                :disabled="pendingAddToCart"
+                @click="addToCart"
+              >
                 Добавить в корзину
               </button>
             </div>
@@ -94,6 +98,7 @@
       },
       images: [],
       product: {},
+      pendingAddToCart: false,
     }),
     async fetch() {
       try {
@@ -114,6 +119,23 @@
       } catch (err) {
         throw err;
       }
+    },
+    methods: {
+      addToCart() {
+        const { id, } = this.product;
+        const token = this.$store.getters["auth/getToken"];
+        const res = this.$store.dispatch("product/addToCart", { id, token, });
+
+        this.pendingAddToCart = true;
+
+        res.then(({ message, }) => {
+          this.pendingAddToCart = false;
+
+          alert(message); 
+        }).catch((err) => {
+          throw err;
+        });
+      },
     },
   };
 </script>

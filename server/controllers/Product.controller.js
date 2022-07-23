@@ -1,6 +1,7 @@
 const ProductModel = require("../models/Product");
 const Cart = require("../models/Cart");
 const CartProduct = require("../models/CartProduct");
+const removeFile = require("../removeFile");
 
 class Product {
   async getOne(req, res) {
@@ -77,11 +78,15 @@ class Product {
         return res.status(403).json({ ok: false, message: "Для выполнения следующей операции нужно быть авторизованным", });
       }
 
-      const { id, } = req.body;
+      const { id, } = req.params;
       const product = await ProductModel.findOne({ where: { id, }, });
 
       if (!product) {
         return res.status(404).json({ ok: false, message: "Такого товара не существует", });
+      }
+
+      if (product.userId === req.userId) {
+        return res.status(403).json({ ok: false, message: "Вы не можете добавить свой товар в корзину", });
       }
 
       const cart = await Cart.findOne({ where: { userId: req.userId, }, });
@@ -98,6 +103,7 @@ class Product {
           ...productData,
           cartId: cart.id,
           productId: parseInt(id),
+          userId: req.userId,
           quantity: 1,
         };
 
@@ -120,6 +126,64 @@ class Product {
       }
 
       return res.status(200).json({ ok: true, message: "Товар добавлен в корзину", });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", });
+    }
+  }
+
+  async remove(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения следующей операции нужно быть авторизованным", });
+      }
+
+      const { id, } = req.params;
+      const product = await ProductModel.findOne({ where: { id, }, });
+
+      if (!product) {
+        return res.status(404).json({ ok: false, message: "Такого товара не существует", });
+      }
+
+      if (product.userId !== parseInt(req.userId)) {
+        return res.status(403).json({ ok: false, message: "Нельзя удалить чужой товар", });
+      }
+
+      product.images.map((file) => {
+        removeFile([__dirname, "../../", "productImages", file.replace(/^\/\_nuxt\/productImages\//, "")], res);
+      });
+
+      await product.destroy();
+
+      return res.status(200).json({ ok: true, message: "Товар удален", });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", });
+    }
+  }
+
+  async removeFromCart(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения следующей операции нужно быть авторизованным", });
+      }
+
+      const { id, } = req.params;
+      const product = await CartProduct.findOne({ where: { id, }, });
+
+      if (!product) {
+        return res.status(404).json({ ok: false, message: "Такого товара не существует", });
+      }
+
+      if (product.userId !== parseInt(req.userId)) {
+        return res.status(403).json({ ok: false, message: "Нельзя удалить чужой товар из корзины", });
+      }
+
+      await product.destroy();
+
+      return res.status(200).json({ ok: true, message: "Товар удален из корзины", });
     } catch (err) {
       console.log(err);
 
